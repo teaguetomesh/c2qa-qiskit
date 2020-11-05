@@ -31,7 +31,7 @@ class CVOperators:
         # FIXME -- See Steve 5.4
         #   phi as g(t)
         #   - as +, but QisKit validates that not being unitary
-        arg = (phi * a12dag) - (np.conjugate(phi) * a1dag2)
+        arg = (phi * a12dag) + (np.conjugate(phi) * a1dag2)
 
         return expm(arg)
 
