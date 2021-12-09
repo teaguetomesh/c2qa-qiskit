@@ -92,6 +92,9 @@ def simulate(
         tuple: (state, result) tuple from simulation
     """
 
+    # Calling Aer.get_backend() first imports code to get save_statevector() available.
+    simulator = qiskit.Aer.get_backend(backend_name)
+
     # If this is false, the user must have already called save_statevector!
     if add_save_statevector:
         circuit.save_statevector(
@@ -99,7 +102,6 @@ def simulate(
         )
 
     # Transpile for simulator
-    simulator = qiskit.Aer.get_backend(backend_name)
     circuit_compiled = qiskit.transpile(circuit, simulator)
 
     # Run and get statevector

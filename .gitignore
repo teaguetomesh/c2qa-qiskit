@@ -138,3 +138,6 @@ tests/**/*.mp4
 tutorials/**/*.mp4
 tests/**/*.gif
 tutorials/**/*.gif
+
+# pytest-monitor database
+.pymon
