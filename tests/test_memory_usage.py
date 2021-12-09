@@ -20,7 +20,7 @@ class TestMemoryUsage():
         circuit.measure(qr[0], cr[0])
 
 
-    @pytest.mark.parametrize("loops", range(1, 11))
+    @pytest.mark.parametrize("loops", range(1, 9))
     def test_memory_usage(self, loops):
         registers = []
         for _ in range(loops):
