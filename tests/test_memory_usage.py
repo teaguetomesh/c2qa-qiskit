@@ -21,7 +21,7 @@ class TestMemoryUsage():
 
 
     @pytest.mark.parametrize("loops", range(1, 9))
-    def test_memory_usage(self, loops):
+    def test_increasing_qumodes(self, loops):
         registers = []
         for _ in range(loops):
             registers.append(c2qa.QumodeRegister(num_qumodes=1, num_qubits_per_qumode=2))
@@ -34,7 +34,21 @@ class TestMemoryUsage():
             self.__cat_state(circuit, registers[i], registers[i+1], registers[i+2])
         
         c2qa.util.simulate(circuit)
-       
+
+
+    @pytest.mark.parametrize("qubits_per_qumode", range(2, 8))
+    def test_increasing_cutoff(self, qubits_per_qumode):
+        for _ in range(qubits_per_qumode):
+            qmr = c2qa.QumodeRegister(num_qumodes=1, num_qubits_per_qumode=qubits_per_qumode)
+            qr =qiskit.QuantumRegister(size=1)
+            cr =qiskit.ClassicalRegister(size=1)
+        
+            circuit = c2qa.CVCircuit(qmr, qr, cr)
+
+            self.__cat_state(circuit, qmr, qr, cr)        
+            
+            c2qa.util.simulate(circuit)
+
 
     def teardown_class(self):
         con = sqlite3.connect(".pymon")
